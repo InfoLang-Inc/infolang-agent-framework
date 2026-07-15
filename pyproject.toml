@@ -1,0 +1,89 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "infolang-agent-framework"
+dynamic = ["version"]
+description = "InfoLang semantic-memory context provider for the Microsoft Agent Framework."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+authors = [{ name = "InfoLang, Inc." }]
+keywords = [
+    "infolang",
+    "agent-framework",
+    "microsoft-agent-framework",
+    "memory",
+    "context-provider",
+    "llm",
+    "agents",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Typing :: Typed",
+]
+dependencies = [
+    "agent-framework>=1.0,<2",
+    "infolang>=0.2,<0.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "pytest-asyncio>=0.24",
+    "pytest-cov>=5",
+    "ruff>=0.6",
+    "mypy>=1.11",
+]
+
+[project.urls]
+Homepage = "https://infolang.ai"
+Repository = "https://github.com/InfoLang-Inc/infolang-agent-framework"
+
+[tool.hatch.version]
+path = "src/infolang_agent_framework/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/infolang_agent_framework"]
+
+[tool.pytest.ini_options]
+addopts = "-ra --strict-markers -m 'not live'"
+testpaths = ["tests"]
+asyncio_mode = "auto"
+markers = [
+    "live: hits the real InfoLang API; requires INFOLANG_API_KEY (deselected by default)",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["infolang_agent_framework"]
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+    "\\.\\.\\.",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "W"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["src"]

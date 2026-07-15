@@ -47,6 +47,8 @@ dev = [
 [project.urls]
 Homepage = "https://infolang.ai"
 Repository = "https://github.com/InfoLang-Inc/infolang-agent-framework"
+Source = "https://github.com/InfoLang-Inc/infolang-agent-framework"
+Issues = "https://github.com/InfoLang-Inc/infolang-agent-framework/issues"
 
 [tool.hatch.version]
 path = "src/infolang_agent_framework/_version.py"
